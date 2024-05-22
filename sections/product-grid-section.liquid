@@ -1,0 +1,518 @@
+<section id="product-grid-popup-section">
+  <div class="product-grid">
+    {% assign product_1_id = section.settings.product_1 %}
+    {% assign product_2_id = section.settings.product_2 %}
+    {% assign product_3_id = section.settings.product_3 %}
+    {% assign product_4_id = section.settings.product_4 %}
+    {% assign product_5_id = section.settings.product_5 %}
+    {% assign product_6_id = section.settings.product_6 %}
+
+    {% assign selected_products = product_1_id
+      | append: ','
+      | append: product_2_id
+      | append: ','
+      | append: product_3_id
+      | append: ','
+      | append: product_4_id
+      | append: ','
+      | append: product_5_id
+      | append: ','
+      | append: product_6_id
+      | split: ','
+    %}
+
+    {% for product_id in selected_products %}
+      {% assign product = all_products[product_id] %}
+      {% if product %}
+        <div class="product-image" style="position: relative;">
+          <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+          <div class="product-overlay">
+            <button class="open-popup" data-product-id="{{ product.id }}">+</button>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div id="popup-overlay" class="popup-overlay" style="display:none;"></div>
+  <div id="product-popup" style="display:none;">
+    <div class="popup-content">
+      <span class="close-popup">&times;</span>
+      <div class="popup-image">
+        <img id="popup-product-image" src="" alt="">
+      </div>
+      <div class="popup-details">
+        <div class="content-wrap-pop-up">
+          <h2 id="popup-product-title" data-product-id=""></h2>
+          <p id="popup-product-price"></p>
+          <p id="popup-product-description"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant-wrap">
+      <div class="color-container">
+        <label for="color-variant">Color: </label>
+        <select id="color-variant"></select>
+      </div>
+
+      <div class="size-container">
+        <label for="size-variant">Size: </label>
+        <select id="size-variant"></select>
+      </div>
+
+      <div class="atc-btn">
+        <button id="add-to-cart">Add to Cart <i class="fa-solid fa-arrow-right-long"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="add-to-cart-notification" style="display: none;">Product added to cart!</div>
+
+{% for product in collections.all.products %}
+  <h2>{{ product.title }} - {{ product.id }}</h2>
+{% endfor %}
+
+<style>
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 10px 20px;
+  }
+
+  .product-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .open-popup {
+    background-color: #ffffffec;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  #product-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px 10px;
+    overflow-y: auto;
+  }
+
+  .popup-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .popup-image {
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+    margin-right: 20px;
+  }
+
+  .popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: none;
+  }
+
+  .popup-details {
+    flex: 2;
+  }
+
+  .close-popup {
+    position: absolute;
+    top: 5px;
+    right: 75px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .content-wrap-pop-up {
+    padding: 10px 0;
+  }
+
+  .content-wrap-pop-up h2 {
+    font-size: 20px;
+    margin: 0 0 10px;
+  }
+
+  .content-wrap-pop-up #popup-product-price {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+
+  .content-wrap-pop-up p {
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+    margin: 0 0 10px;
+    width: 200px;
+  }
+
+  .variant-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .color-container, .size-container {
+    margin: 10px 0;
+  }
+
+  .variant-wrap #color-variant {
+    padding: 10px 90px;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .variant-wrap #size-variant {
+    padding: 10px 105px;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .atc-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .atc-btn button {
+    padding: 15px 90px;
+    margin-top: 30px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #000;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.4s;
+  }
+
+  .atc-btn button:hover {
+    background-color: #333;
+  }
+
+  .atc-btn button .fa-arrow-right-long {
+    padding-left: 10px;
+  }
+
+  #add-to-cart-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Adjustments for screens smaller than 768px */
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .popup-content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .popup-image {
+      margin: 0 0 20px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .variant-wrap {
+      width: 100%;
+    }
+  }
+
+  /* Adjustments for screens smaller than 480px */
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .popup-content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .popup-image {
+      width: 100%;
+      max-width: 150px;
+    }
+
+    .content-wrap-pop-up h2 {
+      font-size: 16px;
+    }
+
+    .content-wrap-pop-up #popup-product-price {
+      font-size: 14px;
+    }
+
+    .content-wrap-pop-up p {
+      font-size: 12px;
+    }
+
+    .variant-wrap select {
+      padding: 5px;
+      font-size: 12px;
+    }
+
+    .atc-btn button {
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+   // Ensure productsData is populated with product data including variants
+   let productsData = {
+     {% for product_id in selected_products %}
+       {% assign product = all_products[product_id] %}
+       {% if product %}
+         "{{ product.id }}": {
+           "image": "{{ product.featured_image | img_url: 'medium' }}",
+           "title": "{{ product.title }}",
+           "price": "{{ product.price | money }}",
+           "description": "{{ product.description }}",
+           "variants": [
+             {% for variant in product.variants %}
+               {
+                 "id": "{{ variant.id }}",
+                 "title": "{{ variant.title }}",
+                 "price": "{{ variant.price | money }}",
+                 "option1": "{{ variant.option1 }}", // Assuming option1 is size
+                 "option2": "{{ variant.option2 }}", // Assuming option2 is color
+                 "option3": "{{ variant.option3 }}"
+               }{% unless forloop.last %},{% endunless %}
+             {% endfor %}
+           ]
+         }{% unless forloop.last %},{% endunless %}
+       {% endif %}
+     {% endfor %}
+   };
+
+   const softWinterJacketProductId = 9425087136025;
+
+   document.addEventListener("DOMContentLoaded", function() {
+     let openPopupButtons = document.querySelectorAll('.open-popup');
+     let popup = document.getElementById('product-popup');
+     let overlay = document.getElementById('popup-overlay');
+     let closePopupButton = document.querySelector('.close-popup');
+     let popupProductImage = document.getElementById('popup-product-image');
+     let popupProductTitle = document.getElementById('popup-product-title');
+     let popupProductPrice = document.getElementById('popup-product-price');
+     let popupProductDescription = document.getElementById('popup-product-description');
+     let colorVariantSelect = document.getElementById('color-variant');
+     let sizeVariantSelect = document.getElementById('size-variant');
+     let notification = document.getElementById('add-to-cart-notification');
+
+     openPopupButtons.forEach(function(button) {
+       button.addEventListener('click', function() {
+         let productId = this.getAttribute('data-product-id');
+         let product = productsData[productId];
+
+         if (product) {
+           popupProductImage.src = product.image;
+           popupProductTitle.textContent = product.title;
+           popupProductTitle.setAttribute('data-product-id', productId);
+           popupProductPrice.textContent = product.price;
+           popupProductDescription.innerHTML = product.description;
+
+           // Clear previous options
+           colorVariantSelect.innerHTML = '';
+           sizeVariantSelect.innerHTML = '';
+
+           // Populate color and size variants
+           let colorOptions = new Set();
+           let sizeOptions = new Set();
+
+           product.variants.forEach(function(variant) {
+             colorOptions.add(variant.option2); // Assuming option2 is color
+             sizeOptions.add(variant.option1); // Assuming option1 is size
+           });
+
+           colorOptions.forEach(function(color) {
+             let option = document.createElement('option');
+             option.value = color;
+             option.textContent = color;
+             colorVariantSelect.appendChild(option);
+           });
+
+           sizeOptions.forEach(function(size) {
+             var option = document.createElement('option');
+             option.value = size;
+             option.textContent = size;
+             sizeVariantSelect.appendChild(option);
+           });
+
+           // Show the popup and overlay
+           overlay.style.display = 'block';
+           popup.style.display = 'block';
+         }
+       });
+     });
+
+     closePopupButton.addEventListener('click', function() {
+       overlay.style.display = 'none';
+       popup.style.display = 'none';
+     });
+
+     // Close popup when clicking outside of it
+     overlay.addEventListener('click', function() {
+       overlay.style.display = 'none';
+       popup.style.display = 'none';
+     });
+
+     document.getElementById('add-to-cart').addEventListener('click', function() {
+      let productId = popupProductTitle.getAttribute('data-product-id');
+      let selectedColor = colorVariantSelect.value;
+      let selectedSize = sizeVariantSelect.value;
+
+       console.log('Selected product:', productId);
+       console.log('Selected color:', selectedColor);
+       console.log('Selected size:', selectedSize);
+
+     let selectedVariant = productsData[productId].variants.find(function(variant) {
+     return variant.option2 === selectedColor && variant.option1 === selectedSize;
+   });
+
+  if (selectedVariant) {
+       // Check if the selected variant is Black and Medium
+       if (selectedColor === 'Black' && selectedSize === 'M') {
+         // Get the variant ID for the Soft Winter Jacket with Black and Medium options
+         let softWinterJacketVariantId = productsData[productId].variants.find(function(variant) {
+           return variant.option2 === 'Black' && variant.option1 === 'M';
+         }).id;
+
+         // Add the Soft Winter Jacket to the cart
+         addToCart("9425087136025", 1);
+         console.log('Added Soft Winter Jacket to cart');
+       }
+
+       // Add the selected product to the cart
+       addToCart(selectedVariant.id, 1);
+     } else {
+       console.log('No matching variant found');
+     }
+     });
+
+     function addToCart(variantId, quantity) {
+       fetch('/cart/add.js', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+           id: variantId,
+           quantity: quantity
+         })
+       })
+       .then(response => response.json())
+       .then(data => {
+         console.log('Added to cart:', data);
+         showNotification();
+       })
+       .catch(error => {
+         console.error('Error adding to cart:', error);
+       });
+     }
+
+     function showNotification() {
+       notification.style.display = 'block';
+       setTimeout(function() {
+         notification.style.display = 'none';
+       }, 3000);
+     }
+   });
+</script>
+
+{% schema %}
+{
+  "name": "Product grid section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "product",
+      "id": "product_4",
+      "label": "Product 4"
+    },
+    {
+      "type": "product",
+      "id": "product_5",
+      "label": "Product 5"
+    },
+    {
+      "type": "product",
+      "id": "product_6",
+      "label": "Product 6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product grid section"
+    }
+  ]
+}
+{% endschema %}
