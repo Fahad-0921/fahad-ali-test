@@ -54,23 +54,25 @@
 
     <div class="variant-wrap">
       <div class="color-container">
-        <!-- <label for="color-variant">Color: </label> -->
-        <!-- /<select id="color-variant"></select> -->
-      </div>
-
-      <div class="size-container">
-        <label for="size-variant">Size: </label>
-        <select id="size-variant">
+        <label for="color-variant">Color: </label>
+        <select id="color-variant">
           <!-- ----- -->
-          <div class="color-box" id="white-box" onclick="selectColor('white')">
+          <div for="color-variant" class="color-box" id="color-variant white-box" onclick="selectColor('white')">
             <div class="color-line" id="white-line"></div>
+            White
           </div>
           <div class="color-box" id="black-box" onclick="selectColor('black')">
             <div class="color-line" id="black-line"></div>
+            Black
           </div>
 
           <!-- --------------- -->
         </select>
+      </div>
+
+      <div class="size-container">
+        <label for="size-variant">Size: </label>
+        <select id="size-variant"></select>
       </div>
 
       <div class="atc-btn">
