@@ -535,48 +535,51 @@
 </style>
 
 <script>
-      document.addEventListener("DOMContentLoaded", function() {
-    let productsData = {
-      {% for product_id in selected_products %}
-        {% assign product = all_products[product_id] %}
-        {% if product %}
-          "{{ product.id }}": {
-            "image": "{{ product.featured_image | img_url: 'medium' }}",
-            "title": "{{ product.title }}",
-            "price": "{{ product.price | money }}",
-            "description": "{{ product.description }}",
-            "variants": [
-              {% for variant in product.variants %}
-                {
-                  "id": "{{ variant.id }}",
-                  "title": "{{ variant.title }}",
-                  "price": "{{ variant.price | money }}",
-                  "option1": "{{ variant.option1 }}", // Assuming option1 is size
-                  "option2": "{{ variant.option2 }}", // Assuming option2 is color
-                  "option3": "{{ variant.option3 }}"
-                }{% unless forloop.last %},{% endunless %}
-              {% endfor %}
-            ]
-          }{% unless forloop.last %},{% endunless %}
-        {% endif %}
-      {% endfor %}
-    };
+              // Ensure productsData is populated with product data including variants
+              let productsData = {
+                {% for product_id in selected_products %}
+                  {% assign product = all_products[product_id] %}
+                  {% if product %}
+                    "{{ product.id }}": {
+                      "image": "{{ product.featured_image | img_url: 'medium' }}",
+                      "title": "{{ product.title }}",
+                      "price": "{{ product.price | money }}",
+                      "description": "{{ product.description }}",
+                      "variants": [
+                        {% for variant in product.variants %}
+                          {
+                            "id": "{{ variant.id }}",
+                            "title": "{{ variant.title }}",
+                            "price": "{{ variant.price | money }}",
+                            "option1": "{{ variant.option1 }}", // Assuming option1 is size
+                            "option2": "{{ variant.option2 }}", // Assuming option2 is color
+                            "option3": "{{ variant.option3 }}"
+                          }{% unless forloop.last %},{% endunless %}
+                        {% endfor %}
+                      ]
+                    }{% unless forloop.last %},{% endunless %}
+                  {% endif %}
+                {% endfor %}
+              };
 
-    let openPopupButtons = document.querySelectorAll('.open-popup');
-    let popup = document.getElementById('product-popup');
-    let overlay = document.getElementById('popup-overlay');
-    let closePopupButton = document.querySelector('.close-popup');
-    let popupProductImage = document.getElementById('popup-product-image');
-    let popupProductTitle = document.getElementById('popup-product-title');
-    let popupProductPrice = document.getElementById('popup-product-price');
-    let popupProductDescription = document.getElementById('popup-product-description');
-    let sizeVariantSelect = document.getElementById('size-variant');
-    let customSelectTrigger = document.getElementById('custom-select-trigger');
-    let customOptionsContainer = document.getElementById('custom-options-container');
-    let notification = document.getElementById('add-to-cart-notification');
-    let selectedColor = null; // New variable to track selected color
+              const softWinterJacketProductId = 9425087136025;
 
-    openPopupButtons.forEach(function(button) {
+    document.addEventListener("DOMContentLoaded", function() {
+      let openPopupButtons = document.querySelectorAll('.open-popup');
+      let popup = document.getElementById('product-popup');
+      let overlay = document.getElementById('popup-overlay');
+      let closePopupButton = document.querySelector('.close-popup');
+      let popupProductImage = document.getElementById('popup-product-image');
+      let popupProductTitle = document.getElementById('popup-product-title');
+      let popupProductPrice = document.getElementById('popup-product-price');
+      let popupProductDescription = document.getElementById('popup-product-description');
+      let sizeVariantSelect = document.getElementById('size-variant');
+      let notification = document.getElementById('add-to-cart-notification');
+      let selectedColor = null; // New variable to track selected color
+
+
+
+              openPopupButtons.forEach(function(button) {
       button.addEventListener('click', function() {
         let productId = this.getAttribute('data-product-id');
         let product = productsData[productId];
@@ -589,7 +592,7 @@
           popupProductDescription.innerHTML = product.description;
 
           // Clear previous options
-          customOptionsContainer.innerHTML = '';
+          sizeVariantSelect.innerHTML = '';
 
           // Populate size variants
           let sizeOptions = new Set();
@@ -598,18 +601,10 @@
           });
 
           sizeOptions.forEach(function(size) {
-            var optionDiv = document.createElement('div');
-            optionDiv.classList.add('custom-option');
-            optionDiv.textContent = size;
-            optionDiv.addEventListener('click', function() {
-              customSelectTrigger.textContent = size;
-              document.querySelectorAll('.custom-option').forEach(function(opt) {
-                opt.classList.remove('selected');
-              });
-              optionDiv.classList.add('selected');
-              customOptionsContainer.style.display = 'none'; // Hide options after selecting
-            });
-            customOptionsContainer.appendChild(optionDiv);
+            var option = document.createElement('option');
+            option.value = size;
+            option.textContent = size;
+            sizeVariantSelect.appendChild(option);
           });
 
           // Show the popup and overlay
@@ -630,13 +625,9 @@
       popup.style.display = 'none';
     });
 
-    customSelectTrigger.addEventListener('click', function() {
-      customOptionsContainer.style.display = customOptionsContainer.style.display === 'block' ? 'none' : 'block';
-    });
-
     document.getElementById('add-to-cart').addEventListener('click', function() {
       let productId = popupProductTitle.getAttribute('data-product-id');
-      let selectedSize = customSelectTrigger.textContent;
+      let selectedSize = sizeVariantSelect.value;
 
       console.log('Selected product:', productId);
       console.log('Selected color:', selectedColor); // Use the new selectedColor variable
