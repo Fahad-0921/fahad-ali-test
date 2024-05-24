@@ -412,33 +412,6 @@
 </style>
 
 <script>
-        function selectColor(color) {
-             const whiteBox = document.getElementById('white-box');
-             const blackBox = document.getElementById('black-box');
-             const whiteLine = document.getElementById('white-line');
-             const blackLine = document.getElementById('black-line');
-
-             if (color === 'white') {
-                 whiteBox.style.backgroundColor = 'black';
-                 whiteBox.style.color = 'white';
-                 whiteLine.style.backgroundColor = 'white';
-                 blackBox.style.backgroundColor = 'white';
-                 blackBox.style.color = 'black';
-                 blackLine.style.backgroundColor = 'black';
-             } else if (color === 'black') {
-                 blackBox.style.backgroundColor = 'black';
-                 blackBox.style.color = 'white';
-                 blackLine.style.backgroundColor = 'black';
-                 whiteBox.style.backgroundColor = 'white';
-                 whiteBox.style.color = 'black';
-                 whiteLine.style.backgroundColor = 'white';
-             }
-         }
-
-
-
-
-
 
               // Ensure productsData is populated with product data including variants
               let productsData = {
