@@ -69,8 +69,8 @@
       </div>
 
       <div class="size-wrapper">
-        <label class="size-variant-text" for="size-variant">Size: </label>
-        <select id="size-variant">
+        <label class="size-variant-wrapper-text" for="size-variant-wrapper">Size: </label>
+        <select id="size-variant-wrapper">
           <option>Choose your size</option>
         </select>
       </div>
@@ -275,12 +275,12 @@
                     font-family: Jost;
                   border: 1px solid #000000;
                 }
-                 #size-variant option:hover {
+                 #size-variant-wrapper option:hover {
                      background-color: #000000;
                    border: 2px solid cyan;
                 } */
 
-                .size-wrapper .size-variant-text {
+                .size-wrapper .size-variant-wrapper-text {
                     margin: 10px 0;
                   font-size: 14px;
                     font-weight: 400;
@@ -301,7 +301,7 @@
                     cursor: pointer;
                 }
 
-                /* .variant-wrap #size-variant {
+                /* .variant-wrap #size-variant-wrapper {
                     padding: 10px 95px;
                     width: 100%;
                     cursor: pointer;
@@ -522,7 +522,7 @@
       let popupProductTitle = document.getElementById('popup-product-title');
       let popupProductPrice = document.getElementById('popup-product-price');
       let popupProductDescription = document.getElementById('popup-product-description');
-      let sizeVariantSelect = document.getElementById('size-variant');
+      let sizeVariantSelect = document.getElementById('size-variant-wrapper');
       let notification = document.getElementById('add-to-cart-notification');
       let selectedColor = null; // New variable to track selected color
 
