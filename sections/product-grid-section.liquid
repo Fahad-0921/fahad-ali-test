@@ -30,7 +30,7 @@
           <div class="product-overlay">
             <button class="open-popup" data-product-id="{{ product.id }}">+</button>
           </div>
-          <div class="product-color-line" data-color="{{ product.variants.first.option2 }}"></div>
+          <!-- <div class="product-color-line" data-color="{{ product.variants.first.option2 }}"></div> -->
         </div>
       {% endif %}
     {% endfor %}
@@ -55,7 +55,18 @@
     <div class="variant-wrap">
       <div class="color-container">
         <label for="color-variant">Color: </label>
-        <select id="color-variant"></select>
+
+        <!-- ----- -->
+        <div class="color-box" id="white-box" onclick="selectColor('white')">
+          <div class="color-line" id="white-line"></div>
+          White
+        </div>
+        <div class="color-box" id="black-box" onclick="selectColor('black')">
+          <div class="color-line" id="black-line"></div>
+          Black
+        </div>
+
+        <!-- --------------- -->
       </div>
 
       <div class="size-container">
