@@ -1,5 +1,4 @@
 <h1 class="main-heading">Tisso Vison in the wild</h1>
-
 <section id="product-grid-popup-section">
   <div class="product-grid">
     {% assign product_1_id = section.settings.product_1 %}
@@ -31,6 +30,7 @@
           <div class="product-overlay">
             <button class="open-popup" data-product-id="{{ product.id }}">+</button>
           </div>
+          <div class="product-color-line" data-color="{{ product.variants.first.option2 }}"></div>
         </div>
       {% endif %}
     {% endfor %}
