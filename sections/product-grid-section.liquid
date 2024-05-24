@@ -82,12 +82,6 @@
 <div id="add-to-cart-notification" style="display: none;">Product added to cart!</div>
 
 <style>
-      *{
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -412,7 +406,6 @@
 </style>
 
 <script>
-
               // Ensure productsData is populated with product data including variants
               let productsData = {
                 {% for product_id in selected_products %}
