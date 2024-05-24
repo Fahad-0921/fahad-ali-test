@@ -68,7 +68,7 @@
         <!-- --------------- -->
       </div>
 
-      <div class="size-container">
+      <div class="size-wrapper">
         <label class="size-variant-text" for="size-variant">Size: </label>
         <select id="size-variant">
           <option>Choose your size</option>
@@ -85,7 +85,7 @@
 
 <style>
   /* Style the select element */
-  .size-container select {
+  .size-wrapper select {
     padding: 10px;
     width: 100%;
     cursor: pointer;
@@ -98,7 +98,7 @@
   }
 
   /* Style the options */
-  .size-container select option {
+  .size-wrapper select option {
     padding: 10px;
     font-size: 16px;
     font-weight: 400;
@@ -108,7 +108,7 @@
   }
 
   /* Style the hover effect on options */
-  .size-container select option:hover {
+  .size-wrapper select option:hover {
     background-color: cyan; /* Background color on hover */
   }
 
@@ -262,11 +262,11 @@
                   margin: 0;
                 }
 
-                .size-container {
+                /* .size-wrapper {
                     margin: 10px 0;
-                }
+                } */
 
-                /* .size-container select {
+                /* .size-wrapper select {
                      padding: 10px 95px;
                     width: 100%;
                     cursor: pointer;
@@ -280,7 +280,7 @@
                    border: 2px solid cyan;
                 } */
 
-                .size-container .size-variant-text {
+                .size-wrapper .size-variant-text {
                     margin: 10px 0;
                   font-size: 14px;
                     font-weight: 400;
@@ -312,7 +312,7 @@
 
 
 
-      .size-container {
+      .size-wrapper {
         margin: 10px 0;
         position: relative;
         width: 100%;
