@@ -385,6 +385,63 @@
            padding-left: 20px;
         padding-right: 20px;
          }
+
+
+  /* Position the button absolutely within the container only on mobile view */
+    .content-wrap button {
+        position: absolute;
+        top: 50%; /* Adjust as needed to place the button vertically */
+        left: 50%; /* Center the button horizontally */
+        transform: translate(-50%, -50%); /* Center the button perfectly */
+        z-index: 2; /* Ensure the button appears above other elements */
+        padding: 15px 30px;
+        font-weight: 400;
+        font-size: 16px;
+        font-family: Jost;
+        color: #FFFFFF;
+        background-color: #000000;
+        cursor: pointer;
+        overflow: hidden;
+        transition: color 0.4s, border-color 0.4s;
+        border: none;
+    }
+
+    .content-wrap button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #FFF544;
+        z-index: -1;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .content-wrap button:hover::before {
+        transform: translateX(0);
+    }
+
+    .content-wrap button:hover {
+        color: #000000;
+        border: none;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      }
 
      @media (max-width: 1080px) {
