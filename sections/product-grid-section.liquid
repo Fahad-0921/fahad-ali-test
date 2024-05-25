@@ -594,9 +594,9 @@
         let productId = popupProductTitle.getAttribute('data-product-id');
         let selectedSize = sizeVariantSelect.value;
 
-        console.log('Selected product:', productId);
-        console.log('Selected color:', selectedColor); // Use the new selectedColor variable
-        console.log('Selected size:', selectedSize);
+        // console.log('Selected product:', productId);
+        // console.log('Selected color:', selectedColor); // Use the new selectedColor variable
+        // console.log('Selected size:', selectedSize);
 
         let selectedVariant = productsData[productId].variants.find(function(variant) {
           return variant.option2 === selectedColor && variant.option1 === selectedSize;
