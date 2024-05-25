@@ -27,7 +27,7 @@
       {% if product %}
         <div class="product-image" style="position: relative;">
           <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-          <div class="product-overlay">
+          <div class="product-overlay {% cycle 'top-right', 'top-left', 'bottom-right', 'bottom-left' %}">
             <button class="open-popup" data-product-id="{{ product.id }}">+</button>
           </div>
           <!-- <div class="product-color-line" data-color="{{ product.variants.first.option2 }}"></div> -->
