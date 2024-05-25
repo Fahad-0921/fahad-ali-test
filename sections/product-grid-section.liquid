@@ -595,7 +595,7 @@
         let selectedSize = sizeVariantSelect.value;
 
         // console.log('Selected product:', productId);
-        // console.log('Selected color:', selectedColor); // Use the new selectedColor variable
+        // console.log('Selected color:', selectedColor);
         // console.log('Selected size:', selectedSize);
 
         let selectedVariant = productsData[productId].variants.find(function(variant) {
@@ -622,7 +622,6 @@
         })
         .then(response => response.json())
         .then(data => {
-          // console.log( data);
           showNotification();
         })
         .catch(error => {
@@ -637,7 +636,7 @@
         }, 3000);
       }
 
-      // New function to handle color selection
+      // function to handle color selection
       function selectColor(color) {
         const whiteBox = document.getElementById('white-box');
         const blackBox = document.getElementById('black-box');
@@ -663,7 +662,7 @@
         }
       }
 
-      window.selectColor = selectColor; // Expose the function to the global scope
+      window.selectColor = selectColor;
     });
 </script>
 
