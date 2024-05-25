@@ -517,21 +517,28 @@
 
               const softWinterJacketProductId = 9425087136025;
 
-    document.addEventListener("DOMContentLoaded", function() {
-      let openPopupButtons = document.querySelectorAll('.open-popup');
-      let popup = document.getElementById('product-popup');
-      let overlay = document.getElementById('popup-overlay');
-      let closePopupButton = document.querySelector('.close-popup');
-      let popupProductImage = document.getElementById('popup-product-image');
-      let popupProductTitle = document.getElementById('popup-product-title');
-      let popupProductPrice = document.getElementById('popup-product-price');
-      let popupProductDescription = document.getElementById('popup-product-description');
-      let sizeVariantSelect = document.getElementById('size-variant-wrapper');
-      let notification = document.getElementById('add-to-cart-notification');
-      let selectedColor = null; // New variable to track selected color
+  document.addEventListener("DOMContentLoaded", function() {
+    let openPopupButtons = document.querySelectorAll('.open-popup');
+    let popup = document.getElementById('product-popup');
+    let overlay = document.getElementById('popup-overlay');
+    let closePopupButton = document.querySelector('.close-popup');
+    let popupProductImage = document.getElementById('popup-product-image');
+    let popupProductTitle = document.getElementById('popup-product-title');
+    let popupProductPrice = document.getElementById('popup-product-price');
+    let popupProductDescription = document.getElementById('popup-product-description');
+    let sizeVariantSelect = document.getElementById('size-variant-wrapper');
+    let notification = document.getElementById('add-to-cart-notification');
+    let selectedColor = null; // New variable to track selected color
 
+    // Function to style the dropdowns
+    function styleDropdowns() {
+      let dropdowns = document.querySelectorAll('#size-variant-wrapper');
+      dropdowns.forEach(function(dropdown) {
+        dropdown.style.backgroundColor = 'red';
+      });
+    }
 
-              openPopupButtons.forEach(function(button) {
+    openPopupButtons.forEach(function(button) {
       button.addEventListener('click', function() {
         let productId = this.getAttribute('data-product-id');
         let product = productsData[productId];
@@ -558,6 +565,9 @@
             option.textContent = size;
             sizeVariantSelect.appendChild(option);
           });
+
+          // Style the dropdowns
+          styleDropdowns();
 
           // Show the popup and overlay
           overlay.style.display = 'block';
@@ -651,6 +661,9 @@
     }
 
     window.selectColor = selectColor; // Expose the function to the global scope
+
+    // Call the function to style dropdowns when the document is loaded
+    styleDropdowns();
   });
 </script>
 
