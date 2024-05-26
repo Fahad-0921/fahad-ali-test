@@ -685,12 +685,12 @@
               sizeVariantSelect.innerHTML = '';
 
               // Add the placeholder option
-              let placeholderOption = document.createElement('option');
-              placeholderOption.value = "";
-              placeholderOption.textContent = "Choose your size";
-              placeholderOption.disabled = true;
-              placeholderOption.selected = true;
-              sizeVariantSelect.appendChild(placeholderOption);
+              // let placeholderOption = document.createElement('option');
+              // placeholderOption.value = "";
+              // placeholderOption.textContent = "Choose your size";
+              // placeholderOption.disabled = true;
+              // placeholderOption.selected = true;
+              // sizeVariantSelect.appendChild(placeholderOption);
 
               // Populate size variants
               let sizeOptions = new Set();
@@ -699,7 +699,7 @@
               });
 
               sizeOptions.forEach(function(size) {
-                var option = document.createElement('option');
+                let option = document.createElement('option');
                 option.value = size;
                 option.textContent = size;
                 sizeVariantSelect.appendChild(option);
