@@ -569,54 +569,6 @@
 </style>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-      const dropdown = document.querySelector('.custom-dropdown');
-      const selected = dropdown.querySelector('.dropdown-selected');
-      const optionsContainer = dropdown.querySelector('.dropdown-options');
-      const optionsList = optionsContainer.querySelectorAll('.dropdown-option');
-
-      selected.addEventListener('click', () => {
-          optionsContainer.classList.toggle('show');
-      });
-
-      optionsList.forEach(option => {
-          option.addEventListener('click', () => {
-              selected.textContent = option.textContent;
-              optionsContainer.classList.remove('show');
-          });
-
-          option.addEventListener('mouseover', () => {
-              option.style.backgroundColor = '#000';
-              option.style.color = '#fff';
-          });
-
-          option.addEventListener('mouseout', () => {
-              option.style.backgroundColor = '';
-              option.style.color = '';
-          });
-      });
-
-      document.addEventListener('click', function(event) {
-          if (!dropdown.contains(event.target)) {
-              optionsContainer.classList.remove('show');
-          }
-      });
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   // Ensure productsData is populated with product data including variants
                   let productsData = {
                     {% for product_id in selected_products %}
@@ -674,13 +626,53 @@
               // Clear previous options
               sizeVariantSelect.innerHTML = '';
 
-              // Add the placeholder option
-              // let placeholderOption = document.createElement('option');
-              // placeholderOption.value = "";
-              // placeholderOption.textContent = "Choose your size";
-              // placeholderOption.disabled = true;
-              // placeholderOption.selected = true;
-              // sizeVariantSelect.appendChild(placeholderOption);
+
+
+
+
+                document.addEventListener('DOMContentLoaded', function() {
+      const dropdown = document.querySelector('.custom-dropdown');
+      const selected = dropdown.querySelector('.dropdown-selected');
+      const optionsContainer = dropdown.querySelector('.dropdown-options');
+      const optionsList = optionsContainer.querySelectorAll('.dropdown-option');
+
+      selected.addEventListener('click', () => {
+          optionsContainer.classList.toggle('show');
+      });
+
+      optionsList.forEach(option => {
+          option.addEventListener('click', () => {
+              selected.textContent = option.textContent;
+              optionsContainer.classList.remove('show');
+          });
+
+          option.addEventListener('mouseover', () => {
+              option.style.backgroundColor = '#000';
+              option.style.color = '#fff';
+          });
+
+          option.addEventListener('mouseout', () => {
+              option.style.backgroundColor = '';
+              option.style.color = '';
+          });
+      });
+
+      document.addEventListener('click', function(event) {
+          if (!dropdown.contains(event.target)) {
+              optionsContainer.classList.remove('show');
+          }
+      });
+  });
+
+
+
+
+
+
+
+
+
+
 
               // Populate size variants
               let sizeOptions = new Set();
