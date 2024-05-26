@@ -569,7 +569,7 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const dropdown = document.querySelector('.custom-dropdown');
     const selected = dropdown.querySelector('.dropdown-selected');
     const optionsContainer = dropdown.querySelector('.dropdown-options');
@@ -709,10 +709,7 @@
         const formData = {
           items: [{
             id: selectedVariantId,
-            quantity: 1,
-            properties: {
-              color: selectedColor
-            }
+            quantity: 1
           }]
         };
 
