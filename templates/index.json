@@ -79,12 +79,12 @@
     "product_grid_section_VP6Njq": {
       "type": "product-grid-section",
       "settings": {
-        "product_1": "",
-        "product_2": "",
-        "product_3": "",
-        "product_4": "",
-        "product_5": "",
-        "product_6": ""
+        "product_1": "the-3p-fulfilled-snowboard",
+        "product_2": "the-collection-snowboard-oxygen",
+        "product_3": "the-complete-snowboard",
+        "product_4": "the-inventory-not-tracked-snowboard",
+        "product_5": "soursop-1",
+        "product_6": "the-multi-location-snowboard"
       }
     }
   },
